@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDO</title>
+    <link rel="stylesheet" href="vendor/toastify.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-newPrimary text-newPrimary h-screen flex items-center justify-center">
+    <div class="">
+        <div class="addTaskRow">
+            <button class="bg-green-400 text-white px-4 py-2 mb-3 rounded-full" id="createTask">Add Task</button>
+            <input class="bg-[#141414] text-white px-4 py-2 mb-3 rounded-full animate"
+                style="width: 0; display: none; transition: all 0.5s;" type="text" id="taskTitle"
+                placeholder="Task Title">
+            <input class="bg-[#141414] text-white px-4 py-2 mb-3 rounded-full animate" style="width: 0; display: none;"
+                type="text" id="taskDescription" placeholder="Task Description">
+        </div>
+        <table class="table-rounded table-fixed border-spacing-5">
+            <tr>
+                <th class="bg-[#141414] text-left px-8 py-4">#</th>
+                <th class="bg-[#141414] text-left px-8 py-4">Task</th>
+                <th class="bg-[#141414] text-left px-8 py-4">Description</th>
+                <th class="bg-[#141414] text-left px-8 py-4">Complete?</th>
+                <th class="bg-[#141414] text-left px-8 py-4">Actions</th>
+            </tr>
+            <tbody id="taskList">
+                <% for (let i=0; i < tasks.length; i++) { %>
+                    <% if (tasks[i].deleted===0) { %>
+                        <tr>
+                            <td class="px-6 py-4"><%- tasks[i].id %></td>
+                            <td class="px-6 py-4"><%- tasks[i].title %></td>
+                            <td class="px-6 py-4"><%- tasks[i].description %></td>
+                            <td class="px-6 py-4"><%- tasks[i].complete===0 ? "No" : "Yes" %></td>
+                            <td class="px-6 py-4">
+                                <button class="bg-green-400 text-white px-4 py-2 mr-2 rounded-full" onclick="taskFunction('complete', '<%- tasks[i].id %>')">Complete</button>
+                                <!-- <button class="bg-blue-400 text-white px-4 py-2 ml-2 mr-2 rounded-full" onclick="taskFunction('edit', '<%- tasks[i].id %>')">Edit</button> -->
+                                <button class="bg-red-400 text-white px-4 py-2 rounded-full" onclick="taskFunction('delete', '<%- tasks[i].id %>')">Delete</button>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <script src="vendor/tailwind.js"></script>
+    <script src="vendor/jquery.min.js"></script>
+    <script src="vendor/toastify.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
