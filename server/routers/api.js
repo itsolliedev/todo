@@ -71,7 +71,7 @@ wss.on("connection", (ws) => {
                     })
                 })
             } else if(task === "complete") {
-                const sqlQuery = `UPDATE todos SET completed = 1 WHERE id = ${id}`;
+                const sqlQuery = `UPDATE todos SET completed = 1, timeCompleted = ${new Date().getTime()} WHERE id = ${id}`;
                 database.query(sqlQuery, (err, result) => {
                     if(err) {
                         console.log(err)
